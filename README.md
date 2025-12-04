@@ -105,7 +105,7 @@ for Delegated Management**.
 | `armis.action`                 | YES      | The action to perform. **Must** be `list` to list card contents. | `list` |
 | `armis.sd-aid`                 | NO       | AID of the security domain to open a GP session to. Defaults to Supplementary Security Domain AID `D233000000444F4D`, if not provided. | `D233000000444F4D` |
 | `armis.sd-key`                 | NO       | Key of the security domain to open a GP session to. Defaults to Supplementary Security Domain key `classpath:sensitive/ssd.key.hex`, if not provided. | - `file:path/to/ssd.key.hex`<br>- `classpath:path/to/ssd.key.hex`<br>- `hex:0102030405060708090A0B0C0D0E0F` |
-| `armis.sd-key-diversification` | NO       | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV` or `KDF3`. Defaults to `KDF3`, if not provided. | `KDF3` |
+| `armis.sd-key-diversification` | NO       | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV`, `KDF3` or custom KDF diversifier template (e.g. for Thales cards `$_0x000x000x00$k0x00$0$1$4$5$6$7$8$9$l$l`). Defaults to `KDF3`, if not provided. | `KDF3` |
 | `armis.dm-key`                 | NO       | Domain key for Delegated Management in PEM format. Must be an RSA key. Defaults to `classpath:sensitive/dm.key.pem`, if not provided. | - `file:path/to/dm.key.pem`<br>- `classpath:path/to/dm.key.pem` |
 
 Example usage:
@@ -131,8 +131,9 @@ for Delegated Management**.
 | `armis.action`                 | YES      | The action to perform. **Must** be `deploy-manager` to deploy ARMIS Manager Applet. | `deploy-manager` |
 | `armis.sd-aid`                 | NO       | AID of the security domain to open a GP session to. Defaults to Supplementary Security Domain AID `D233000000444F4D`, if not provided. | `D233000000444F4D` |
 | `armis.sd-key`                 | NO       | Key of the security domain to open a GP session to. Defaults to Supplementary Security Domain key `classpath:sensitive/ssd.key.hex`, if not provided. | - `file:path/to/ssd.key.hex`<br>- `classpath:path/to/ssd.key.hex`<br>- `hex:0102030405060708090A0B0C0D0E0F` |
-| `armis.sd-key-diversification` | NO       | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV` or `KDF3`. Defaults to `KDF3`, if not provided. | `KDF3` |
+| `armis.sd-key-diversification` | NO       | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV`, `KDF3` or custom KDF diversifier template (e.g. for Thales cards `$_0x000x000x00$k0x00$0$1$4$5$6$7$8$9$l$l`). Defaults to `KDF3`, if not provided. | `KDF3` |
 | `armis.dm-key`                 | NO       | Domain key for Delegated Management in PEM format. Must be an RSA key. Defaults to `classpath:sensitive/dm.key.pem`, if not provided. | - `file:path/to/dm.key.pem`<br>- `classpath:path/to/dm.key.pem` |
+| `armis.dap-key`                | NO       | Data Authentication Pattern key in PEM format. Defaults to `classpath:sensitive/dap.key.pem`, if not provided. Required if card requires applet signing with DAP key. | - `file:path/to/dap.key.pem`<br>- `classpath:path/to/dap.key.pem` |
 | `armis.cap-file-hash-function` | NO       | Hash function for hashing CAP files for INSTALL FOR LOAD. Must be one of `SHA1`, `SHA256`, `SHA384` or `SHA512`. Defaults to `SHA256`, if not provided. | `SHA256` |
 | `armis.manager-cap-file`       | YES      | Path to ARMIS Manager Applet CAP file. | `file:path/to/applet.cap` |
 | `armis.library-cap-file`       | NO       | Path to ARMIS Utilities Library CAP file. Only manager applet is deployed if library path is not provided. | `file:path/to/library.cap` |
@@ -170,8 +171,9 @@ for Delegated Management**.
 | `armis.action`                 | YES      | The action to perform. **Must** be `deploy-client` to deploy a client applet. | `deploy-client` |
 | `armis.sd-aid`                 | NO       | AID of the security domain to open a GP session to. Defaults to Supplementary Security Domain AID `D233000000444F4D`, if not provided. | `D233000000444F4D` |
 | `armis.sd-key`                 | NO       | Key of the security domain to open a GP session to. Defaults to Supplementary Security Domain key `classpath:sensitive/ssd.key.hex`, if not provided. | - `file:path/to/ssd.key.hex`<br>- `classpath:path/to/ssd.key.hex`<br>- `hex:0102030405060708090A0B0C0D0E0F` |
-| `armis.sd-key-diversification` | NO       | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV` or `KDF3`. Defaults to `KDF3`, if not provided. | `KDF3` |
+| `armis.sd-key-diversification` | NO       | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV`, `KDF3` or custom KDF diversifier template (e.g. for Thales cards `$_0x000x000x00$k0x00$0$1$4$5$6$7$8$9$l$l`). Defaults to `KDF3`, if not provided. | `KDF3` |
 | `armis.dm-key`                 | NO       | Domain key for Delegated Management in PEM format. Must be an RSA key. Defaults to `classpath:sensitive/dm.key.pem`, if not provided. | - `file:path/to/dm.key.pem`<br>- `classpath:path/to/dm.key.pem` |
+| `armis.dap-key`                | NO       | Data Authentication Pattern key in PEM format. Defaults to `classpath:sensitive/dap.key.pem`, if not provided. Required if card requires applet signing with DAP key. | - `file:path/to/dap.key.pem`<br>- `classpath:path/to/dap.key.pem` |
 | `armis.cap-file-hash-function` | NO       | Hash function for hashing CAP files for INSTALL FOR LOAD. Must be one of `SHA1`, `SHA256`, `SHA384` or `SHA512`. Defaults to `SHA256`, if not provided. | `SHA256` |
 | `armis.client-cap-file`        | YES      | Path to the Client Applet CAP file. | `file:path/to/applet.cap` |
 | `armis.client-aid`             | NO       | AID of the client applet. Defaults to `4D616E61676572417071`, if not provided. | `4D616E61676572417071` |
@@ -203,7 +205,8 @@ for Delegated Management**.
 | `armis.steps`                  | YES      | The management step(s) to perform. **Must** be `load` to load a package onto a card. | `load` |
 | `armis.sd-aid`                 | NO       | AID of the security domain to open a GP session to. Defaults to Supplementary Security Domain AID `D233000000444F4D`, if not provided. | `D233000000444F4D` |
 | `armis.sd-key`                 | NO       | Key of the security domain to open a GP session to. Defaults to Supplementary Security Domain key `classpath:sensitive/ssd.key.hex`, if not provided. | - `file:path/to/ssd.key.hex`<br>- `classpath:path/to/ssd.key.hex`<br>- `hex:0102030405060708090A0B0C0D0E0F` |
-| `armis.sd-key-diversification` | NO       | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV` or `KDF3`. Defaults to `KDF3`, if not provided. | `KDF3` |
+| `armis.sd-key-diversification` | NO       | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV`, `KDF3` or custom KDF diversifier template (e.g. for Thales cards `$_0x000x000x00$k0x00$0$1$4$5$6$7$8$9$l$l`). Defaults to `KDF3`, if not provided. | `KDF3` |
+| `armis.dap-key`                | NO       | Data Authentication Pattern key in PEM format. Defaults to `classpath:sensitive/dap.key.pem`, if not provided. Required if card requires applet signing with DAP key. | - `file:path/to/dap.key.pem`<br>- `classpath:path/to/dap.key.pem` |
 | `armis.dm-key`                 | NO       | Domain key for Delegated Management in PEM format. Must be an RSA key. Defaults to `classpath:sensitive/dm.key.pem`, if not provided. | - `file:path/to/dm.key.pem`<br>- `classpath:path/to/dm.key.pem` |
 | `armis.cap-file-hash-function` | NO       | Hash function for hashing CAP files for INSTALL FOR LOAD. Must be one of `SHA1`, `SHA256`, `SHA384` or `SHA512`. Defaults to `SHA256`, if not provided. | `SHA256` |
 | `armis.steps=load:{cap-file}`  | YES      | Path to the CAP file to load. | `'file:path/to/file.cap'` |
@@ -229,8 +232,9 @@ for Delegated Management**.
 | `armis.steps`                               | YES             | The management step(s) to perform. **Must** be `install` to install an applet onto a card. | `install` |
 | `armis.sd-aid`                              | NO              | AID of the security domain to open a GP session to. Defaults to Supplementary Security Domain AID `D233000000444F4D`, if not provided. | `D233000000444F4D` |
 | `armis.sd-key`                              | NO              | Key of the security domain to open a GP session to. Defaults to Supplementary Security Domain key `classpath:sensitive/ssd.key.hex`, if not provided. | - `file:path/to/ssd.key.hex`<br>- `classpath:path/to/ssd.key.hex`<br>- `hex:0102030405060708090A0B0C0D0E0F` |
-| `armis.sd-key-diversification`              | NO              | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV` or `KDF3`. Defaults to `KDF3`, if not provided. | `KDF3` |
+| `armis.sd-key-diversification`              | NO              | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV`, `KDF3` or custom KDF diversifier template (e.g. for Thales cards `$_0x000x000x00$k0x00$0$1$4$5$6$7$8$9$l$l`). Defaults to `KDF3`, if not provided. | `KDF3` |
 | `armis.dm-key`                              | NO              | Domain key for Delegated Management in PEM format. Must be an RSA key. Defaults to `classpath:sensitive/dm.key.pem`, if not provided. | - `file:path/to/dm.key.pem`<br>- `classpath:path/to/dm.key.pem` |
+| `armis.dap-key`                | NO       | Data Authentication Pattern key in PEM format. Defaults to `classpath:sensitive/dap.key.pem`, if not provided. Required if card requires applet signing with DAP key. | - `file:path/to/dap.key.pem`<br>- `classpath:path/to/dap.key.pem` |
 | `armis.cap-file-hash-function`              | NO              | Hash function for hashing CAP files for INSTALL FOR LOAD. Must be one of `SHA1`, `SHA256`, `SHA384` or `SHA512`. Defaults to `SHA256`, if not provided. | `SHA256` |
 | `armis.steps=install:{cap-file}`            | YES<sup>1</sup> | Path to the CAP file containing the applet to install. | `'file:path/to/file.cap'` |
 | `armis.steps=install:{package-aid}`         | YES<sup>2</sup> | AID of the package to install the applet from. | `'0102030405'` |
@@ -264,7 +268,7 @@ for Delegated Management**.
 | `armis.steps`                          | YES             | The management step(s) to perform. **Must** be `uninstall` to uninstall an applet from a card. | `uninstall` |
 | `armis.sd-aid`                         | NO              | AID of the security domain to open a GP session to. Defaults to Supplementary Security Domain AID `D233000000444F4D`, if not provided. | `D233000000444F4D` |
 | `armis.sd-key`                         | NO              | Key of the security domain to open a GP session to. Defaults to Supplementary Security Domain key `classpath:sensitive/ssd.key.hex`, if not provided. | - `file:path/to/ssd.key.hex`<br>- `classpath:path/to/ssd.key.hex`<br>- `hex:0102030405060708090A0B0C0D0E0F` |
-| `armis.sd-key-diversification`         | NO              | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV` or `KDF3`. Defaults to `KDF3`, if not provided. | `KDF3` |
+| `armis.sd-key-diversification`         | NO              | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV`, `KDF3` or custom KDF diversifier template (e.g. for Thales cards `$_0x000x000x00$k0x00$0$1$4$5$6$7$8$9$l$l`). Defaults to `KDF3`, if not provided. | `KDF3` |
 | `armis.dm-key`                         | NO              | Domain key for Delegated Management in PEM format. Must be an RSA key. Defaults to `classpath:sensitive/dm.key.pem`, if not provided. | - `file:path/to/dm.key.pem`<br>- `classpath:path/to/dm.key.pem` |
 | `armis.cap-file-hash-function`         | NO              | Hash function for hashing CAP files for INSTALL FOR LOAD. Must be one of `SHA1`, `SHA256`, `SHA384` or `SHA512`. Defaults to `SHA256`, if not provided. | `SHA256` |
 | `armis.steps=uninstall:{cap-file}`     | YES<sup>1</sup> | Path to the CAP file containing the applet to uninstall. | `'file:path/to/file.cap'` |
@@ -295,7 +299,7 @@ for Delegated Management**.
 | `armis.steps`                      | YES             | The management step(s) to perform. **Must** be `unload` to remove a package from a card. | `unload` |
 | `armis.sd-aid`                     | NO              | AID of the security domain to open a GP session to. Defaults to Supplementary Security Domain AID `D233000000444F4D`, if not provided. | `D233000000444F4D` |
 | `armis.sd-key`                     | NO              | Key of the security domain to open a GP session to. Defaults to Supplementary Security Domain key `classpath:sensitive/ssd.key.hex`, if not provided. | - `file:path/to/ssd.key.hex`<br>- `classpath:path/to/ssd.key.hex`<br>- `hex:0102030405060708090A0B0C0D0E0F` |
-| `armis.sd-key-diversification`     | NO              | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV` or `KDF3`. Defaults to `KDF3`, if not provided. | `KDF3` |
+| `armis.sd-key-diversification`     | NO              | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV`, `KDF3` or custom KDF diversifier template (e.g. for Thales cards `$_0x000x000x00$k0x00$0$1$4$5$6$7$8$9$l$l`). Defaults to `KDF3`, if not provided. | `KDF3` |
 | `armis.dm-key`                     | NO              | Domain key for Delegated Management in PEM format. Must be an RSA key. Defaults to `classpath:sensitive/dm.key.pem`, if not provided. | - `file:path/to/dm.key.pem`<br>- `classpath:path/to/dm.key.pem` |
 | `armis.cap-file-hash-function`     | NO              | Hash function for hashing CAP files for INSTALL FOR LOAD. Must be one of `SHA1`, `SHA256`, `SHA384` or `SHA512`. Defaults to `SHA256`, if not provided. | `SHA256` |
 | `armis.steps=unload:{cap-file}`    | YES<sup>1</sup> | Path to the CAP file containing the package to remove. | `'file:path/to/file.cap'` |
@@ -326,7 +330,7 @@ for Delegated Management**.
 | `armis.steps`                      | YES      | The management step(s) to perform. **Must** be `unload-all` to try to remove all packages from a card. | `unload-all` |
 | `armis.sd-aid`                     | NO       | AID of the security domain to open a GP session to. Defaults to Supplementary Security Domain AID `D233000000444F4D`, if not provided. | `D233000000444F4D` |
 | `armis.sd-key`                     | NO       | Key of the security domain to open a GP session to. Defaults to Supplementary Security Domain key `classpath:sensitive/ssd.key.hex`, if not provided. | - `file:path/to/ssd.key.hex`<br>- `classpath:path/to/ssd.key.hex`<br>- `hex:0102030405060708090A0B0C0D0E0F` |
-| `armis.sd-key-diversification`     | NO       | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV` or `KDF3`. Defaults to `KDF3`, if not provided. | `KDF3` |
+| `armis.sd-key-diversification`     | NO       | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV`, `KDF3` or custom KDF diversifier template (e.g. for Thales cards `$_0x000x000x00$k0x00$0$1$4$5$6$7$8$9$l$l`). Defaults to `KDF3`, if not provided. | `KDF3` |
 | `armis.dm-key`                     | NO       | Domain key for Delegated Management in PEM format. Must be an RSA key. Defaults to `classpath:sensitive/dm.key.pem`, if not provided. | - `file:path/to/dm.key.pem`<br>- `classpath:path/to/dm.key.pem` |
 
 Example usage:
@@ -348,7 +352,7 @@ for Delegated Management**.
 | `armis.steps`                      | YES      | The management step(s) to perform. **Must** be `list` to list card contents. | `list` |
 | `armis.sd-aid`                     | NO       | AID of the security domain to open a GP session to. Defaults to Supplementary Security Domain AID `D233000000444F4D`, if not provided. | `D233000000444F4D` |
 | `armis.sd-key`                     | NO       | Key of the security domain to open a GP session to. Defaults to Supplementary Security Domain key `classpath:sensitive/ssd.key.hex`, if not provided. | - `file:path/to/ssd.key.hex`<br>- `classpath:path/to/ssd.key.hex`<br>- `hex:0102030405060708090A0B0C0D0E0F` |
-| `armis.sd-key-diversification`     | NO       | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV` or `KDF3`. Defaults to `KDF3`, if not provided. | `KDF3` |
+| `armis.sd-key-diversification`     | NO       | Security domain key diversification algorithm. Must be one of `NONE`, `VISA2`, `EMV`, `KDF3` or custom KDF diversifier template (e.g. for Thales cards `$_0x000x000x00$k0x00$0$1$4$5$6$7$8$9$l$l`). Defaults to `KDF3`, if not provided. | `KDF3` |
 | `armis.dm-key`                     | NO       | Domain key for Delegated Management in PEM format. Must be an RSA key. Defaults to `classpath:sensitive/dm.key.pem`, if not provided. | - `file:path/to/dm.key.pem`<br>- `classpath:path/to/dm.key.pem` |
 
 Example usage:
@@ -365,6 +369,24 @@ Example usages:
 ```shell
 java -jar armis-cli.jar --armis.action=manage --armis.sd-key=file:ssd.key.hex --armis.dm-key=file:dm.key.pem --armis.steps=list,unload-all,list
 java -jar armis-cli.jar --armis.action=manage --armis.sd-key=file:ssd.key.hex --armis.dm-key=file:dm.key.pem --armis.steps[0]="load:{cap-file:'file:path/to/file.cap'}" --armis.steps[1]=list --armis.steps[2]="install:{package-aid:'0102030405',applet-aid:'010203040506'}" --armis.steps[3]=list
+```
+
+## Key diversification templates
+
+`armis.sd-key-diversification` parameter accepts key diversification template for cards that require custom key diversification.
+
+Diversification template can contain variables that are expanded based on the key type and diversification data returned by the card and hex literals.
+
+- $0..$f - positional data from the INITIALIZE UPDATE command response (KDD, Key Diversification Data)
+- $k - key type indicator (0x01 for ENC, 0x02 for MAC, 0x03 for DEK)
+- $l$l - derived key length in bits, on two bytes (SCP03 only)
+- $_ - location of 8 bit counter (SCP03 only)
+- 0xFF or FF - hex constant
+
+Key diversification template example for [Thales](https://www.id.ee/en/article/id-card-documentation-2/) cards:
+
+```
+$_0x000x000x00$k0x00$0$1$4$5$6$7$8$9$l$l
 ```
 
 <a name="known-issues"></a>
